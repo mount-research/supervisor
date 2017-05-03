@@ -2,6 +2,12 @@
 name = "supervisor"
 version = "0.1.0"
 authors = ["shockham <samuel.hockham@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/mount-research/supervisor"
+homepage = "https://github.com/mount-research/supervisor"
+documentation = "https://docs.rs/supervisor"
+description = "Spawns a thread and which will restart the work fn when it produces a Result"
 
 [dependencies]
 log = "0.3.5"
