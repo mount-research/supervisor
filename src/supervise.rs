@@ -28,3 +28,23 @@ fn supervise_spawn() {
         Ok("finished")
     });
 }
+
+#[test]
+fn supervise_multi_spawn() {
+    supervise(move || -> Result<&'static str, &'static str> {
+        for i in 0 .. 5 {
+            if i == 4 {
+                return Err("failed work reason");
+            }
+        }
+        Ok("finished")
+    });
+    supervise(move || -> Result<&'static str, &'static str> {
+        for i in 5 .. 10 {
+            if i == 7 {
+                return Err("failed work reason");
+            }
+        }
+        Ok("finished")
+    });
+}
