@@ -25,3 +25,5 @@ fn main() {
     }
 }
 ```
+
+[License](https://github.com/mount-research/supervisor/blob/master/LICENSE.md)
