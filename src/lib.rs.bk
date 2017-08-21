@@ -4,7 +4,7 @@ Spawns a thread and which will restart the work fn when it produces a Result.
 
 [Example usage](https://github.com/mount-research/supervisor/blob/master/examples/simple.rs):
 
-```no_run
+```
 extern crate supervisor;
 
 fn main() {
@@ -29,26 +29,23 @@ fn main() {
 
 #![deny(missing_docs)]
 
-#[macro_use]
-extern crate log;
+#[macro_use] extern crate log;
 
 use std::thread;
-use std::fmt::{Display, Debug};
+use std::fmt::{ Display, Debug };
 
 /// Spawns a thread and which will restart the work_fn when it produces a Result
 pub fn supervise<F, O, E>(work_fn: F)
-where
-    F: Fn() -> Result<O, E> + 'static + Send,
-    O: Debug + Display,
-    E: Debug + Display,
-{
+    where F: Fn() -> Result<O, E> + 'static + Send, O: Debug + Display, E: Debug + Display {
 
-    thread::spawn(move || loop {
-        let result = work_fn();
+    thread::spawn(move || {
+        loop {
+            let result = work_fn();
 
-        match result {
-            Ok(l) => info!("{}", l),
-            Err(e) => error!("Error: {}", e),
+            match result {
+                Ok(l) => info!("{}", l),
+                Err(e) => error!("Error: {}", e),
+            }
         }
     });
 }
@@ -56,7 +53,7 @@ where
 #[test]
 fn supervise_spawn() {
     supervise(move || -> Result<&'static str, &'static str> {
-        for i in 0..5 {
+        for i in 0 .. 5 {
             if i == 4 {
                 return Err("failed work reason");
             }
@@ -68,7 +65,7 @@ fn supervise_spawn() {
 #[test]
 fn supervise_multi_spawn() {
     supervise(move || -> Result<&'static str, &'static str> {
-        for i in 0..5 {
+        for i in 0 .. 5 {
             if i == 4 {
                 return Err("failed work reason");
             }
@@ -76,7 +73,7 @@ fn supervise_multi_spawn() {
         Ok("finished")
     });
     supervise(move || -> Result<&'static str, &'static str> {
-        for i in 5..10 {
+        for i in 5 .. 10 {
             if i == 7 {
                 return Err("failed work reason");
             }

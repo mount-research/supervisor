@@ -2,7 +2,7 @@ extern crate supervisor;
 
 fn main() {
     supervisor::supervise(move || -> Result<&'static str, &'static str> {
-        for i in 0..5 {
+        for i in 0 .. 5 {
             println!("trying: {}", i);
             if i == 4 {
                 return Err("failed work reason");
