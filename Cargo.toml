@@ -10,4 +10,4 @@ documentation = "https://docs.rs/supervisor"
 description = "Spawns a thread and which will restart the work fn when it produces a Result"
 
 [dependencies]
-log = "0.3"
+log = "0.4"
