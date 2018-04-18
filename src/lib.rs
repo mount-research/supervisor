@@ -32,8 +32,8 @@ fn main() {
 #[macro_use]
 extern crate log;
 
+use std::fmt::{Debug, Display};
 use std::thread;
-use std::fmt::{Display, Debug};
 
 /// Spawns a thread and which will restart the work_fn when it produces a Result
 pub fn supervise<F, O, E>(work_fn: F)
@@ -42,7 +42,6 @@ where
     O: Debug + Display,
     E: Debug + Display,
 {
-
     thread::spawn(move || loop {
         let result = work_fn();
 
